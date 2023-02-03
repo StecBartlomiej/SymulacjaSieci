@@ -46,7 +46,6 @@ void PackageSender::push_package(Package &&package)
     buffer_.emplace(std::move(package));
 }
 
-/// Może być źle
 void PackageSender::send_package()
 {
     if (buffer_)
@@ -76,10 +75,14 @@ Worker::Worker(ElementID id, TimeOffset pd, std::unique_ptr<IPackageQueue> q): i
 
 void Worker::do_work(Time t)
 {
-    if (t - processingStartTime_ >= timeOffset_)
+    if (!processing_buffer_.has_value())
     {
-        send_package();
-        push_package(packageQueue_->pop());
+        processing_buffer_ = packageQueue_->pop();
+        processingStartTime_ = t;
+    }
+    if (t % timeOffset_ == 0)
+    {
+        push_package(std::move(processing_buffer_.value()));
     }
 
 }

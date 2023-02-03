@@ -152,7 +152,7 @@ public:
 
     [[nodiscard]] Time get_package_processing_start_time() const {return processingStartTime_;}
 
-    [[nodiscard]] const std::optional<Package>& get_processing_buffer() const {return get_sending_buffer();}
+    [[nodiscard]] const std::optional<Package>& get_processing_buffer() const {return processing_buffer_;}
 
     [[nodiscard]] IPackageStockpile::const_iterator begin() const override {return packageQueue_->begin();}
     [[nodiscard]] IPackageStockpile::const_iterator cbegin() const override {return packageQueue_->cbegin();}
@@ -164,6 +164,7 @@ private:
     TimeOffset timeOffset_;
     Time processingStartTime_ = 0;
     std::unique_ptr<IPackageQueue> packageQueue_;
+    std::optional<Package> processing_buffer_;
 };
 
 #endif //SYMULACJASIECI_NODES_HPP
