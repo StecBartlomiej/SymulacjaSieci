@@ -83,6 +83,7 @@ void Worker::do_work(Time t)
     if (t % timeOffset_ == 0)
     {
         push_package(std::move(processing_buffer_.value()));
+        processing_buffer_.reset();
     }
 
 }
