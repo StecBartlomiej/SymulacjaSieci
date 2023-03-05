@@ -28,4 +28,4 @@ public:
     MOCK_CONST_METHOD0(get_id, ElementID());
 };
 
-#endif /* MOCKS_GLOBAL_FUNCTIONS_MOCK_HPP_ */
+#endif /* NODES_MOCKS_HPP_ */

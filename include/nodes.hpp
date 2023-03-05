@@ -12,12 +12,12 @@
 #include <utility>
 
 
-#if (defined EXERCISE_ID && EXERCISE_ID != EXERCISE_ID_NODES)
+//#if (defined EXERCISE_ID && EXERCISE_ID != EXERCISE_ID_NODES)
 enum class ReceiverType
 {
     WORKER, STOREHOUSE
 };
-#endif
+//#endif
 
 class IPackageReceiver
 {
@@ -29,9 +29,9 @@ public:
     virtual ElementID get_id() const = 0;
 
     // Dopiero w zadaniu Fabryka!
-#if (defined EXERCISE_ID && EXERCISE_ID != EXERCISE_ID_NODES)
+//#if (defined EXERCISE_ID && EXERCISE_ID != EXERCISE_ID_NODES)
     [[nodiscard]] virtual ReceiverType get_receiver_type() const = 0;
-#endif
+//#endif
 
     [[nodiscard]] virtual IPackageStockpile::const_iterator begin() const = 0;
     [[nodiscard]] virtual IPackageStockpile::const_iterator cbegin() const = 0;
@@ -48,9 +48,9 @@ public:
     [[nodiscard]] ElementID get_id() const override {return id_;}
 
     // Dopiero w zadaniu Fabryka!
-#if (defined EXERCISE_ID && EXERCISE_ID != EXERCISE_ID_NODES)
+//#if (defined EXERCISE_ID && EXERCISE_ID != EXERCISE_ID_NODES)
     [[nodiscard]] ReceiverType get_receiver_type() const override {return ReceiverType::STOREHOUSE;}
-#endif
+//#endif
 
     void receive_package(Package &&p) override {pStockpile_->push(std::move(p));}
 
@@ -136,9 +136,9 @@ class Worker final: public PackageSender, public IPackageReceiver
 public:
     Worker(ElementID id, TimeOffset pd, std::unique_ptr<IPackageQueue> q);
 
-#if (defined EXERCISE_ID && EXERCISE_ID != EXERCISE_ID_NODES)
+//#if (defined EXERCISE_ID && EXERCISE_ID != EXERCISE_ID_NODES)
     [[nodiscard]] ReceiverType get_receiver_type() const override {return ReceiverType::WORKER;}
-#endif
+//#endif
 
     [[nodiscard]] IPackageQueue* get_queue() const {return packageQueue_.get();}
 
